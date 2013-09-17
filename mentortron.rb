@@ -13,6 +13,7 @@ LAYOUT = lambda do |body|
     <title>CoderDojo SV Mentortron</title>
     <style>
     body { padding-top: 100px; padding-left: 200px; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 16px; }
+    a { text-decoration: none; }
     </style>
   </head>
   <body>
@@ -30,7 +31,18 @@ class Mentortron < Sinatra::Base
   end
 
   get "/" do
-    erb LAYOUT[%q{<form action="/auth/github" method="get"><input type="submit" value="Become a Mentor"/></form>}]
+    erb LAYOUT[<<-HTML
+<p>
+  Hi there. You might've found this page after being invited to join the ranks
+  of Silicon Valley CoderDojo's mentor team! If that's something you're interested
+  in, you'll need to have a GitHub account. If you don't have one yet, fret not!
+  You can <a href="https://github.com/signup/free" target="_blank">create one here</a>.
+
+  Once you have one just press the button below!
+</p>
+<form action="/auth/github" method="get"><input type="submit" value="Become a Mentor"/></form>
+    HTML
+    ]
   end
 
   get "/auth/github/callback" do
