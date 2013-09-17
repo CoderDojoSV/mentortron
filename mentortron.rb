@@ -14,6 +14,7 @@ LAYOUT = lambda do |body|
     <style>
     body { padding-top: 100px; padding-left: 200px; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 16px; }
     a { text-decoration: none; }
+    p { max-width: 700px; }
     </style>
   </head>
   <body>
