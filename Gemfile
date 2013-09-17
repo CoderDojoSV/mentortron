@@ -5,4 +5,6 @@ ruby "2.0.0"
 gem "sinatra"
 gem "omniauth-github"
 gem "thin"
+gem "rack-ssl"
+gem "octokit"
 
