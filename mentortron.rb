@@ -1,4 +1,6 @@
+require "bundler/setup"
 require "sinatra/base"
+require "omniauth"
 
 LAYOUT = lambda do |body|
   <<-HTML
@@ -17,7 +19,7 @@ LAYOUT = lambda do |body|
 end
 
 class Mentortron < Sinatra::Base
-  use Omniauth::Builder do
+  use OmniAuth::Builder do
     provider :github, ENV["GITHUB_CLIENT_KEY"], ENV["GITHUB_CLIENT_SECRET"]
   end
 
