@@ -12,7 +12,7 @@ LAYOUT = lambda do |body|
   <head>
     <title>CoderDojo SV Mentortron</title>
     <style>
-    body { padding-top: 100px; padding-left: 300px; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 16px; }
+    body { padding-top: 100px; padding-left: 200px; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 16px; }
     </style>
   </head>
   <body>
