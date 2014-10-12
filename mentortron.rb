@@ -5,8 +5,6 @@ require "omniauth"
 require "octokit"
 require "omniauth/strategies/github"
 
-require_relative ".env.rb"
-
 LAYOUT = lambda do |body|
   <<-HTML
 <!doctype html>
