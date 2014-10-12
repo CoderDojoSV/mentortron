@@ -7,7 +7,7 @@ if [[ ! -f .env.rb ]]; then
 ENV['GITHUB_CLIENT_SECRET'] ||= ''
 ENV['DOJOBOT_TOKEN'] ||= ''
 ENV['MENTORS_TEAM_ID'] ||= ''
-"
+" > .env.rb
 
 echo "The file .env.rb has been created."
 echo "You need a GitHub Client ID and Secret."
