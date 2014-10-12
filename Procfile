@@ -1,1 +1,1 @@
-web: ruby mentortron.rb
+web: script/server

@@ -8,3 +8,5 @@ gem "thin"
 gem "rack-ssl"
 gem "octokit", "~> 3.0"
 
+
+gem "pry", :group => :development
