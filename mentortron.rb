@@ -5,6 +5,8 @@ require "omniauth"
 require "octokit"
 require "omniauth/strategies/github"
 
+require_relative ".env.rb"
+
 LAYOUT = lambda do |body|
   <<-HTML
 <!doctype html>
@@ -25,6 +27,10 @@ LAYOUT = lambda do |body|
 end
 
 class Mentortron < Sinatra::Base
+  APP_ROOT = File.expand_path('..', __FILE__)
+  env = File.join(APP_ROOT, '.env.rb')
+  load env if File.file? env
+
   enable :sessions
   use Rack::SSL unless development?
   use OmniAuth::Builder do
@@ -52,14 +58,10 @@ class Mentortron < Sinatra::Base
     if add_to_mentors(login)
       LAYOUT[<<-HTML
 <p>
-  Thanks #{login}, You're officially a mentor!
-  Check out the <a href="https://github.com/coderdojosv/mentor-discussion">mentor discussions</a>
-  repository as well as the repositories for our upcoming classes:
-  <ul>
-    <li><a href="https://github.com/coderdojosv/mobile-games">Mobile Games</a></li>
-    <li><a href="https://github.com/coderdojosv/beginner-python">Beginning Python</a></li>
-    <li><a href="https://github.com/coderdojosv/beginner-websites">Beginning Websites</a></li>
-  </ul>
+  Thanks #{login}, You've been invited to become a mentor!
+  Check your primary GitHub email address for the invitation link. Make sure that you're logged into GitHub in the browser that you open the link with.
+
+  Onve you've joined check out the <a href="https://github.com/coderdojosv/mentor-discussion">mentor discussions</a> and let us know if you've got any ideas for cool stuff.
 </p>
       HTML
       ]
@@ -75,10 +77,25 @@ class Mentortron < Sinatra::Base
     end
   end
 
+  error do
+    LAYOUT[<<-HTML
+<h3>Confound it all! Looks like something went wonky.</h3>
+
+<p>
+Well I have no idea what happened, but whatever it was, it wasn't what we wanted.
+
+If you could kindly <a href="https://github.com/coderdojosv/mentortron/issues/new">Open an issue</a> letting me know what you were doing when you got this error message. I'd sure appreciate it.
+
+Thanks ever so much!
+</p>
+    HTML
+    ]
+  end
+
   helpers do
     def add_to_mentors login
       client = Octokit::Client.new(access_token: ENV["DOJOBOT_TOKEN"])
-      client.add_team_member(ENV["MENTORS_TEAM_ID"], login)
+      client.add_team_membership(ENV["MENTORS_TEAM_ID"], login)
     end
   end
 
