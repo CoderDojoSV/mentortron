@@ -1,0 +1,14 @@
+#!/bin/sh
+
+bundle install --binstubs --path vendor/bundle
+
+if [[ ! -f .env.rb ]]; then
+  echo "ENV['GITHUB_CLIENT_ID'] ||= ''
+ENV['GITHUB_CLIENT_SECRET'] ||= ''
+ENV['DOJOBOT_TOKEN'] ||= ''
+ENV['MENTORS_TEAM_ID'] ||= ''
+"
+
+echo "The file .env.rb has been created."
+echo "You need a GitHub Client ID and Secret."
+fi
